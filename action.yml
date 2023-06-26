@@ -25,6 +25,9 @@ inputs:
   rootPath:
     required: false
     description: 'The root path to your builds. This is the base of which depots will search your files.'
+  depotPaths:
+    required: false
+    description: 'A comma-separated list of depot paths.'
   depot1Path:
     required: false
     description: 'The path to depot1.'
