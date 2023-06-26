@@ -42,7 +42,7 @@ for i in "${!depotPaths[@]}"
 do
   currentDepotPath="${depotPaths[i]}"
   # depot1Path uses firstDepotId, depot2Path uses firstDepotId + 1, depot3Path uses firstDepotId + 2...
-  currentDepot=$((firstDepotId + i - 1))
+  currentDepot=$((firstDepotId + i))
   echo ""
   echo "Adding depot${currentDepot}.vdf ..."
   echo ""
