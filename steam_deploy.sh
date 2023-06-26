@@ -27,7 +27,7 @@ if [ -n "$depotPaths" ]; then
   IFS=',' read -ra depotPaths <<< "$depotPaths"
 else
   # depotPaths not set, checking depot1Path, depot2Path, ...
-  depotPaths = args()
+  depotPaths=()
   i=1;
   until [ $i -gt 9 ]; do
     eval "currentDepotPath=\$depot${i}Path"
