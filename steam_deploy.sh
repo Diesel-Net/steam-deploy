@@ -23,19 +23,29 @@ else
   firstDepotId=$((appId + 1))
 fi
 
-i=1;
-export DEPOTS="\n  "
-until [ $i -gt 9 ]; do
-  eval "currentDepotPath=\$depot${i}Path"
-  if [ -n "$currentDepotPath" ]; then
-    # depot1Path uses firstDepotId, depot2Path uses firstDepotId + 1, depot3Path uses firstDepotId + 2...
-    currentDepot=$((firstDepotId + i - 1))
+if [ -n "$depotPaths" ]; then
+  IFS=',' read -ra depotPaths <<< "$depotPaths"
+else
+  # depotPaths not set, checking depot1Path, depot2Path, ...
+  depotPaths = args()
+  i=1;
+  until [ $i -gt 9 ]; do
+    eval "currentDepotPath=\$depot${i}Path"
+    if [ -n "$currentDepotPath" ]; then
+    depotPaths += "$currentDepotPath"
+  done
+fi
 
-    echo ""
-    echo "Adding depot${currentDepot}.vdf ..."
-    echo ""
-    export DEPOTS="$DEPOTS  \"$currentDepot\" \"depot${currentDepot}.vdf\"\n  "
-    cat << EOF > "depot${currentDepot}.vdf"
+export DEPOTS="\n  "
+for currentDepotPath in "${depotPaths[@]}"
+do
+  # depot1Path uses firstDepotId, depot2Path uses firstDepotId + 1, depot3Path uses firstDepotId + 2...
+  currentDepot=$((firstDepotId + i - 1))
+  echo ""
+  echo "Adding depot${currentDepot}.vdf ..."
+  echo ""
+  export DEPOTS="$DEPOTS  \"$currentDepot\" \"depot${currentDepot}.vdf\"\n  "
+  cat << EOF > "depot${currentDepot}.vdf"
 "DepotBuildConfig"
 {
   "DepotID" "$currentDepot"
@@ -50,12 +60,8 @@ until [ $i -gt 9 ]; do
   "FileExclusion" "**/*_BackUpThisFolder_ButDontShipItWithYourGame*"
 }
 EOF
-
   cat depot${currentDepot}.vdf
   echo ""
-  fi;
-
-  i=$((i+1))
 done
 
 echo ""
