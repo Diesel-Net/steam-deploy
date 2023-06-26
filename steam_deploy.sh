@@ -32,7 +32,8 @@ else
   until [ $i -gt 9 ]; do
     eval "currentDepotPath=\$depot${i}Path"
     if [ -n "$currentDepotPath" ]; then
-    depotPaths += "$currentDepotPath"
+      depotPaths += "$currentDepotPath"
+    fi
   done
 fi
 
