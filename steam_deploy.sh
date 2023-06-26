@@ -7,7 +7,7 @@ steamdir=${STEAM_HOME:-$HOME/Steam}
 contentroot=$(pwd)/$rootPath
 
 # these are temporary file we create, so in a tmpdir
-mkdir BuildOutput
+mkdir -p BuildOutput
 manifest_path=$(pwd)/manifest.vdf
 
 echo ""
