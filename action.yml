@@ -72,6 +72,7 @@ runs:
     firstDepotIdOverride: ${{ inputs.firstDepotIdOverride }}
     buildDescription: ${{ inputs.buildDescription }}
     rootPath: ${{ inputs.rootPath }}
+    depotPaths: ${{ inputs.depotPaths }}
     depot1Path: ${{ inputs.depot1Path }}
     depot2Path: ${{ inputs.depot2Path }}
     depot3Path: ${{ inputs.depot3Path }}
